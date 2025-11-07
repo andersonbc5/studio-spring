@@ -1,16 +1,18 @@
 package com.backdevanderson.studiojoice.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.validation.constraints.NotNull;
+import lombok.*;
+
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
+@Builder
 @Setter
 @Entity
 @Table(name = "tb_servico")
@@ -22,8 +24,12 @@ public class Servico {
 
     @NotBlank
     private String nome;
-    @NotBlank
+    @NotNull
     private Double preco;
-    @NotBlank
+    @NotNull(message = "Tempo de duração é obrigatório")
     private Integer tempoDuracao;
+
+    @OneToMany(mappedBy = "servico")
+    @JsonIgnore
+    private List<Agendamento> agendamentos;
 }

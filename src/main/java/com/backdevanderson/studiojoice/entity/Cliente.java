@@ -1,12 +1,15 @@
 package com.backdevanderson.studiojoice.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.*;
+
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -33,4 +36,9 @@ public class Cliente {
 
     @NotBlank
     private String telefone;
+
+
+    @OneToMany(mappedBy = "cliente")
+    @JsonIgnore
+    private List<Agendamento> agendamentos;
 }
