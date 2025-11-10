@@ -34,8 +34,8 @@ class ProfissionalServiceTest {
     @Test
     void buscarTodasProfissionais() {
 
-        Profissional p1 = new Profissional(null, "Joice", "Extensão de Cilios");
-        Profissional p2 = new Profissional(null, "Sula", "Design Sobrancelha");
+        Profissional p1 = new Profissional(null, "Joice", "Extensão de Cilios", null);
+        Profissional p2 = new Profissional(null, "Sula", "Design Sobrancelha", null);
 
         List<Profissional> listaEsperada = new ArrayList<>();
         listaEsperada.add(p1);

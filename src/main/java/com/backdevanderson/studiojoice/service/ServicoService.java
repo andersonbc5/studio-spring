@@ -2,6 +2,7 @@ package com.backdevanderson.studiojoice.service;
 
 
 import com.backdevanderson.studiojoice.entity.Servico;
+import com.backdevanderson.studiojoice.exceptions.ResourceNotFound;
 import com.backdevanderson.studiojoice.repository.ServicoRepository;
 import lombok.AllArgsConstructor;
 
@@ -26,7 +27,7 @@ public class ServicoService {
 
     public Servico buscarPorId(Long id){
         return servicoRepository.findById(id).
-                orElseThrow(()-> new RuntimeException("serviço não encontrado"));
+                orElseThrow(()-> new ResourceNotFound("Serviço não encontrado: " + id));
     }
 
     public void deletarServico(Long id){

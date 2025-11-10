@@ -2,6 +2,7 @@ package com.backdevanderson.studiojoice.service;
 
 
 import com.backdevanderson.studiojoice.entity.Agendamento;
+import com.backdevanderson.studiojoice.exceptions.ResourceNotFound;
 import com.backdevanderson.studiojoice.repository.AgendamentoRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,7 @@ public class AgendamentoService {
 
     public Agendamento buscarPorId(Long id){
         return agendamentoRepository.findById(id).
-                orElseThrow(()->new RuntimeException("Agendamento não encontrado"));
+                orElseThrow(()-> new ResourceNotFound("Agendamento não encontrado: " + id));
     }
 
     public Agendamento criarAgendamento(Agendamento agendamento){

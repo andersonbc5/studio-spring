@@ -2,6 +2,7 @@ package com.backdevanderson.studiojoice.service;
 
 
 import com.backdevanderson.studiojoice.entity.Cliente;
+import com.backdevanderson.studiojoice.exceptions.ResourceNotFound;
 import com.backdevanderson.studiojoice.repository.ClienteRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,17 +26,17 @@ public class ClienteService {
 
     public Cliente buscarPorId(Long id) {
         return clienteRepository.findById(id).
-                orElseThrow(() -> new RuntimeException("id não encontrado"));
+                orElseThrow(() -> new ResourceNotFound("id não encontrado " + id));
     }
 
     public Cliente buscarPorCpf(String cpf){
         return clienteRepository.findByCpf(cpf).
-                orElseThrow(()-> new RuntimeException("Cpf não encontrado"));
+                orElseThrow(()-> new ResourceNotFound("Cpf não encontrado " + cpf));
     }
 
     public Cliente buscarPorTelefone(String telefone){
         return clienteRepository.findByTelefone(telefone).
-                orElseThrow(()->new RuntimeException("telefone não encontrado"));
+                orElseThrow(()->new ResourceNotFound("telefone não encontrado"));
     }
 
     public void deletarCliente(Long id){
@@ -44,7 +45,7 @@ public class ClienteService {
 
     public void deletarClienteCpf(String cpf){
         Cliente cliente = clienteRepository.findByCpf(cpf).
-                orElseThrow(()-> new RuntimeException("Cliente não encontrado"));
+                orElseThrow(()-> new ResourceNotFound("Cliente não encontrado " + cpf));
 
         clienteRepository.delete(cliente);
     }

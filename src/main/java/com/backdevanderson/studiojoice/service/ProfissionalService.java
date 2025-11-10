@@ -2,6 +2,7 @@ package com.backdevanderson.studiojoice.service;
 
 
 import com.backdevanderson.studiojoice.entity.Profissional;
+import com.backdevanderson.studiojoice.exceptions.ResourceNotFound;
 import com.backdevanderson.studiojoice.repository.ProfissionalRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,17 +27,17 @@ public class ProfissionalService {
 
     public Profissional buscarPorNome(String nome){
         return profissionalRepository.findByNome(nome).
-                orElseThrow(()->new RuntimeException("profissional não encontrada"));
+                orElseThrow(()->new ResourceNotFound("Profissional não encontrada: " + nome));
     }
 
     public Profissional buscarPorEspecialidade(String especialidade){
         return profissionalRepository.findByEspecialidade(especialidade).
-                orElseThrow(()->new RuntimeException("especialidade não encontrada"));
+                orElseThrow(()->new ResourceNotFound("Especialidade não encontrada: " + especialidade));
     }
 
     public Profissional buscarPorId(Long id){
         return profissionalRepository.findById(id).
-                orElseThrow(()->new RuntimeException("profissional não encontrada"));
+                orElseThrow(()->new ResourceNotFound("Profissional não encontrada: id " + id));
     }
 
     public void deletarProfissional(Long id){
