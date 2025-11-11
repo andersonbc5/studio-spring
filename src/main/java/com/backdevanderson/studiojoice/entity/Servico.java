@@ -26,6 +26,8 @@ public class Servico {
     private String nome;
     @NotNull
     private Double preco;
+
+    @Column(name = "tempo_duracao")
     @NotNull(message = "Tempo de duração é obrigatório")
     private Integer tempoDuracao;
 
